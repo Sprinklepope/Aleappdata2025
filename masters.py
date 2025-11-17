@@ -336,25 +336,25 @@ def parse_datetime(dt_str):
 def masters():
     #creates argument parser so the script can run from the command line
     parser = argparse.ArgumentParser(description="Run ALEAPP and generate a timeline visualization.") #--help
-    parser.add_argument("--start", required=False, default="2024-07-14 01:00:00",
+    parser.add_argument("--start", required=False, default="2024-07-13 18:00:00",
                         help="Start time (format: YYYY-MM-DD HH:MM:SS)")
-    #2020-02-08 20:00:00 2021-11-27 00:00:00
 
-    parser.add_argument("--end", required=False, default="2024-07-14 02:00:00",
+
+    parser.add_argument("--end", required=False, default="2024-07-16 18:00:00",
                         help="End time (format: YYYY-MM-DD HH:MM:SS)")
-    #2020-02-08 21:00:00 2021-11-30 00:00:00
+
     parser.add_argument("--input", required=False, default=None,
                         help="Input file/folder path (zip/tar/fs directory)")
-    parser.add_argument("--output", required=False, default="/home/stephanie/PycharmProjects/Aleappdata2025/Output",
+    parser.add_argument("--output", required=False, default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "Output"),
                         help="Output folder for ALEAPP report")
 
     args = parser.parse_args() #reads arguments passed
     output_path = args.output
     input_path = args.input
 
-    # --- INPUT SELECTION (EXCLUDED FROM TIMING) ---
     if input_path is None:
-        input_folder = "/home/stephanie/PycharmProjects/Aleappdata2025/Input/"
+        input_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Input")
+        print(input_folder)
         entries = os.listdir(input_folder)
 
         if not entries:
